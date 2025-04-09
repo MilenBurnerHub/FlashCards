@@ -64,7 +64,7 @@
       function showAllWords(){
         data.forEach(post => {
           output.insertAdjacentHTML('beforeend',
-            `<article class="card"> 
+            `<article class="card_list"> 
                     <div class="word"> ${post.Woord}</div>
                     <div class="engels"> <strong>Engels:</strong> ${post.Engels}</div>
                     <div class="sort"> <strong>Soort:</strong> ${post.Soort}</div>
@@ -106,7 +106,7 @@
 
       filtered.forEach(item => {
         output.insertAdjacentHTML('beforeend', `
-          <article class="card">
+          <article class="card_list">
             <div class="word">${item.Woord}</div>
             <div class="sort"><strong>Soort:</strong> ${item.Soort}</div>
             <div class="engels"><strong>Engels:</strong> ${item.Engels}</div>
