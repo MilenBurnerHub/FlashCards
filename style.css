@@ -18,8 +18,11 @@
     --paragraphs-font: "Nunito Sans", sans-serif;
 }
 body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     font-family: Arial, sans-serif;
-    background: black;
+    background: var(--mainColor-lighterGrey);
     color: white;
 }
 .card{
@@ -108,8 +111,11 @@ ul{
     gap: 10px;
 }
 nav{
+    width: 50%;
     display: flex;
     justify-content: center;
+    border-radius: 10px;
+    background-color: var(--mainColor-Grey);
 }
 .input_group {
     display: flex;
@@ -118,4 +124,7 @@ nav{
 }
 .outputContainer{
     margin-top: 25px;
+}
+select{
+    border-radius: 10px;
 }
