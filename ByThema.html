@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Thema Filter</title>
+  <link rel="stylesheet" href="./style.css">
+ 
+</head>
+<body>
+
+  <h1>Filter by Thema</h1>
+
+  <form id="filterForm">
+    <label for="themaSelect">Select Thema:</label>
+    <select id="themaSelect"></select>
+    <button type="submit">Show Words</button>
+  </form>
+
+  <div id="output"></div>
+
+  <script>
+    const select = document.getElementById('themaSelect');
+    const form = document.getElementById('filterForm');
+    const output = document.getElementById('output');
+
+    let data = [];
+
+    fetch('./Words_array.json')
+      .then(res => res.json())
+      .then(json => {
+        data = json;
+
+        // 🧠 Get unique ThemaTaak values
+        const uniqueThemes = [...new Set(data.map(item => item.ThemaTaak).filter(Boolean))].sort((a, b) => a - b);
+
+        // 🧩 Populate the dropdown
+        uniqueThemes.forEach(thema => {
+          const option = document.createElement('option');
+          option.value = thema;
+          option.textContent = `Thema ${thema}`;
+          select.appendChild(option);
+        });
+      });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const selectedThema = select.value;
+      const filtered = data.filter(item => String(item.ThemaTaak) === selectedThema);
+
+      output.innerHTML = ''; // Clear old content
+
+      if (filtered.length === 0) {
+        output.textContent = 'No results found.';
+        return;
+      }
+
+      filtered.forEach(item => {
+        output.insertAdjacentHTML('beforeend', `
+          <article class="card">
+            <div class="word">${item.Woord}</div>
+            <div class="sort"><strong>Soort:</strong> ${item.Soort}</div>
+            <div class="engels"><strong>Engels:</strong> ${item.Engels}</div>
+            <div class="descr"><strong>Omschrijving:</strong> ${item.Omschrijving}</div>
+          </article>
+        `);
+      });
+    });
+  </script>
+
+</body>
+</html>

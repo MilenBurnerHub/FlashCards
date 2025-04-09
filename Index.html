@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Woorden A1 - A2 Random </title>
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alata&family=Lobster&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <h1>Woorden A1 - A2 Random</h1>
+ <nav>
+    <ul>
+      <li>
+        <a id="showAll">ShowAllWords</a>
+      </li>
+      <li>
+        <a class="showRandom" id="randomBtn" >Get New Random Word</a>
+      </li>
+      <li>
+        <form id="filterForm">
+          <article class="input_group">
+            
+             <select id="themaSelect"></select>
+          </article>
+          <button class="showByThema" type="submit">Show Words</button>
+        </form>
+      </li>
+    </ul>
+ </nav>
+
+
+
+  <div class="outputContainer" id="output">All Cards
+    
+  </div>
+
+  <script>
+    const select = document.getElementById('themaSelect');
+    const form = document.getElementById('filterForm');
+    const output = document.getElementById('output');
+    const btn = document.getElementById('randomBtn');
+    const showAll = document.getElementById('showAll');
+    let data = [];
+  
+    fetch('./Words_array.json')
+      .then(response => response.json())
+      .then(json => {
+        data = json;
+        // Optional: Show a first random card on load
+        // showRandomCard();
+        const uniqueThemes = [...new Set(data.map(item => item.ThemaTaak).filter(Boolean))].sort((a, b) => a - b);
+
+        uniqueThemes.forEach(thema => {
+          const option = document.createElement('option');
+          option.value = thema;
+          option.textContent = `Thema ${thema}`;
+          select.appendChild(option);
+        });
+      });
+
+      function showAllWords(){
+        data.forEach(post => {
+          output.insertAdjacentHTML('beforeend',
+            `<article class="card"> 
+                    <div class="word"> ${post.Woord}</div>
+                    <div class="engels"> <strong>Engels:</strong> ${post.Engels}</div>
+                    <div class="sort"> <strong>Soort:</strong> ${post.Soort}</div>
+                    <div class="descr"> <strong>Omschrijving:</strong> ${post.Omschrijving}</div>
+                    </article`
+          );
+        });
+      }
+
+    function showRandomCard() {
+      if (data.length === 0) return;
+  
+      const random = data[Math.floor(Math.random() * data.length)];
+  
+      output.innerHTML = `
+        <article class="card"> 
+          <div class="word">${random.Woord}</div>
+          <div class="engels"><strong>Engels:</strong> ${random.Engels}</div>
+          <div class="sort"><strong>Soort:</strong> ${random.Soort}</div>
+          <div class="descr"><strong>Omschrijving:</strong> ${random.Omschrijving}</div>
+        </article>
+      `;
+    }
+  
+    showAll.addEventListener('click', showAllWords);
+    btn.addEventListener('click', showRandomCard);
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const selectedThema = select.value;
+      const filtered = data.filter(item => String(item.ThemaTaak) === selectedThema);
+
+      output.innerHTML = ''; // Clear old content
+
+      if (filtered.length === 0) {
+        output.textContent = 'No results found.';
+        return;
+      }
+
+      filtered.forEach(item => {
+        output.insertAdjacentHTML('beforeend', `
+          <article class="card">
+            <div class="word">${item.Woord}</div>
+            <div class="sort"><strong>Soort:</strong> ${item.Soort}</div>
+            <div class="engels"><strong>Engels:</strong> ${item.Engels}</div>
+            <div class="descr"><strong>Omschrijving:</strong> ${item.Omschrijving}</div>
+          </article>
+        `);
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Woorden A1 - A2 All Words</title>
+  <link rel="stylesheet" href="./style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alata&family=Lobster&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <h1>Woorden A1 - A2 All Words</h1>
+  <nav>
+    <ul>
+      <li>
+        <a id="showAll" href="">ShowAllWords</a>
+      </li>
+      <li>
+        <a class="showRandom" href="./AllWords.html">Get New Random Word</a>
+      </li>
+    </ul>
+  </nav>
+
+
+  <div  id="output">All Cards
+    
+  </div>
+
+  <script>
+    const output = document.getElementById('output');
+        fetch('./Words_array.json')
+            .then (response => response.json())
+            .then (data => {
+                data.forEach(post => {
+                  output.insertAdjacentHTML('beforeend', 
+                  `<article class="card"> 
+                    <div class="word"> ${post.Woord}</div>
+                    <div class="engels"> <strong>Engels:</strong> ${post.Engels}</div>
+                    <div class="sort"> <strong>Soort:</strong> ${post.Soort}</div>
+                    <div class="descr"> <strong>Omschrijving:</strong> ${post.Omschrijving}</div>
+                    </article>`);
+                });
+            });
+
+
+
+
+
+    // function loadAndFind() {
+    //   const idToFind = parseInt(document.getElementById('searchId').value);
+
+    //   fetch('Words.json')
+    //     .then(response => response.json())
+    //     .then(data => {
+    //       const found = data.find(item => item.id === idToFind);
+    //       document.getElementById('output').textContent = found
+    //         ? JSON.stringify(found, null, 2)
+    //         : 'No object found with that ID.';
+    //     })
+    //     .catch(err => {
+    //       console.error(err);
+    //       document.getElementById('output').textContent = 'Failed to load JSON file.';
+    //     });
+    // }
+  </script>
+</body>
+</html>

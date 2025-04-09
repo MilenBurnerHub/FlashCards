@@ -1,0 +1,121 @@
+:root {
+    --mainColor-darkGrey: #232323;
+    --mainColor-lighterGrey: #2D2D2C;
+    --mainColor-Grey: #121212;
+    --mainColor-Black: #000000;
+    --highlightcolor-lIGHTPurple: #C5BEF6;
+    --inputFieldColor-lightGrey: #383838;
+    --highlightcolor-washedGreen: #A9EBCE;
+    --highlightcolor-lightYellow: #D3D641;
+    --highlightcolor-lightRed: #FF6961;
+    --highlightcolor-lightGrey: #454545;
+    --highlightcolor-lightGreen: #B9FF3B;
+    --highlightcolor-darkGreen: #0A332C;
+    --notificationcolor-wpGreen: #00A884;
+    --logo-font: "Lobster", sans-serif;
+    --nav-font: "Alata", sans-serif;
+    --headers-font: "Poppins", sans-serif;
+    --paragraphs-font: "Nunito Sans", sans-serif;
+}
+body {
+    font-family: Arial, sans-serif;
+    background: black;
+    color: white;
+}
+.card{
+    display: flex;
+    flex-direction: column;
+    height: 100px;
+    width: fit-content;
+    text-align: center;
+    margin-bottom: 25px;
+
+}
+.word{
+    font-size: 1.9rem;
+    font-weight: 800;
+}
+.engels{
+    color: #00A884;
+}
+.sort, .engels, .descr, .word{
+    margin: 5px 5px;
+}
+#output{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+h1{
+    text-align: center;
+}
+#showAll {
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: black;
+    text-decoration: none;
+    font-family: var(--nav-font);
+    font-weight: 600;
+    background-color: var(--highlightcolor-lIGHTPurple);
+}
+.showRandom{
+    cursor: pointer;
+    padding: 10px 20px;
+    margin-top: 5px;
+    border-radius: 10px;
+    border:none;
+    color: black;
+    text-decoration: none;
+    font-family: var(--nav-font);
+    font-weight: 600;
+    background-color: var(--highlightcolor-washedGreen);
+}
+.showByThema{
+    cursor: pointer;
+    padding: 10px 20px;
+    margin-top: 5px;
+    border-radius: 10px;
+    border:none;
+    color: black;
+    text-decoration: none;
+    font-family: var(--nav-font);
+    font-weight: 600;
+    background-color: var(--highlightcolor-lightRed);
+}
+.RandButton{
+    padding: 10px 20px;
+    margin-top: 5px;
+    border-radius: 10px;
+    border:none;
+    color: black;
+    text-decoration: none;
+    font-family: var(--nav-font);
+    font-weight: 600;
+    background-color: var(--notificationcolor-wpGreen);
+}
+li{
+    text-decoration: none;
+}
+ul{
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+    list-style-type: none;
+    align-items: center;
+    gap: 10px;
+}
+nav{
+    display: flex;
+    justify-content: center;
+}
+.input_group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.outputContainer{
+    margin-top: 25px;
+}
